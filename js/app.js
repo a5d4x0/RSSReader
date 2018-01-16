@@ -4,7 +4,6 @@
  * 源转换成我们能够利用的 JSON 对象。它还使用了 Handlebars 模板库和 Jquery.
  */
 
-// 所有的名字和链接都是真实可用的
 var allFeeds = [
     {
         name: '优达学城 Blog',
@@ -63,7 +62,6 @@ function init() {
                      container.append(entryTemplate(entry));
                  });
                  iTitle.push(entries[0].title);
-                 //console.log(entries[0].title);
                  if (cb) {
                      cb();
                  }

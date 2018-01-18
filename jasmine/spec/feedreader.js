@@ -24,9 +24,10 @@ $(function() {
          * 遍历 allFeeds 对象里面的所有的源来保证有链接字段而且链接不是空的。
          */
         it('url not empty', function() {
+            var regularExpressionUrl = /^((ht|f)tps?):\/\/([\w\-]+(\.[\w\-]+)*\/)*[\w\-]+(\.[\w\-]+)*\/?(\?([\w\-\.,@?^=%&:\/~\+#]*)+)?/; // 检查 URL 格式是否正确的正规表达式
             for(var i=0; i<allFeeds.length; i++) {
-                expect(allFeeds[i].url).toBeDefined();
-                expect(allFeeds[i].url).not.toBe('');
+                feedTest(allFeeds[i].url);
+                expect(allFeeds[i].url).toMatch(regularExpressionUrl);
             }        
         });
 
@@ -35,32 +36,39 @@ $(function() {
          */
         it('name not empty', function() {
             for(var i=0; i<allFeeds.length; i++) {
-                expect(allFeeds[i].name).toBeDefined();
-                expect(allFeeds[i].name).not.toBe('');
+                feedTest(allFeeds[i].name);
             }        
         });
+        /* 
+         * 检查字段是否为空
+         */
+        function feedTest(strExp) {
+            expect(strExp).toBeDefined();
+            expect(strExp).not.toBe('');
+        }
     });
 
     /*  菜单的测试用例 */
     describe('The menu', function() {
-        it('menu is hidden', function() {
-            expect($('body').hasClass('menu-hidden')).toBeTruthy();
-        });
         /* 
          * 保证菜单元素默认是隐藏的。
          */
-        it('menu is changed', function() {
-            $('.menu-icon-link').trigger('click');
-            expect($('body').hasClass('menu-hidden')).toBeFalsy();
+        it('menu is hidden', function() {
+            expect($('body').hasClass('menu-hidden')).toBe(true);
         });
         /* 
           * 保证当菜单图标被点击的时候菜单会切换可见状态。这个
           * 测试包含两个 expectation ： 党点击图标的时候菜单是否显示，
           * 再次点击的时候是否隐藏。
           */
+        it('menu is changed', function() {
+            $('.menu-icon-link').trigger('click');
+            expect($('body').hasClass('menu-hidden')).toBe(false);
+        });
+
         it('menu is changed again', function() {
             $('.menu-icon-link').trigger('click');
-            expect($('body').hasClass('menu-hidden')).toBeTruthy();
+            expect($('body').hasClass('menu-hidden')).toBe(true);
         });
     });
     
@@ -78,7 +86,7 @@ $(function() {
             loadFeed(0, done);
         });
         it('loadFeed success', function(done) {
-            expect($('.feed')).not.toBeNull();
+            expect($('.feed')).not.toBe('');
             done();
         });
     });
@@ -97,7 +105,7 @@ $(function() {
             //将最新加载的两个源的第一个标题取出，用来对比内容是否改变
             mParam[0] = iTitle.pop();
             mParam[1] = iTitle.pop();
-            expect(mParam[0] == mParam[1]).toBeFalsy();
+            expect(mParam[0] == mParam[1]).toBe(false);
             done();
         });   
     });      

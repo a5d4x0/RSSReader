@@ -86,7 +86,7 @@ $(function() {
             loadFeed(0, done);
         });
         it('loadFeed success', function(done) {
-            expect($('.feed')).not.toBe('');
+            expect($('.feed').html()).not.toBe('');
             done();
         });
     });

@@ -1,5 +1,5 @@
 # RSSReader
-这是一款RSS订阅器，它使用 Goole Feed Reader API 将 RSS源转换成我们能够利用的 JSON 对象。它还使用了 Handlebars 模板库和 Jquery。并使用jasmine进行了单元测试。
+这是一款RSS订阅器，它使用 Goole Feed Reader API 将 RSS源转换成我们能够利用的 JSON 对象。它还使用了 Handlebars 模板库和 Jquery,并使用jasmine进行了单元测试。
 # How to use
 在浏览器中运行index.html即可运行全部代码，
 app.js中是处理业务逻辑的代码，
